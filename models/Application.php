@@ -52,12 +52,12 @@ class Application extends \yii\db\ActiveRecord
         return [
             [['description', 'income', 'number_of_dependants', 'updated_at'], 'default', 'value' => null],
             [['first_name', 'last_name', 'date_of_birth'], 'required'],
-            [['date_of_birth'], 'date', 'format' => 'php:Y-m-d'],
+            [['date_of_birth'], 'date', 'format' => 'php:Y-m-d', 'max' => date('Y-m-d'), 'tooBig' => 'Date of birth cannot in the future'],
             [['created_at', 'updated_at'], 'safe'],
             [['description'], 'string'],
-            [['income'], 'number'],
+            [['income'], 'number', 'min' => 0, 'tooSmall' => 'Income cannot be less than 0'],
             [['number_of_dependants'], 'default', 'value' => null],
-            [['number_of_dependants'], 'integer'],
+            [['number_of_dependants'], 'integer', 'min' => 0, 'tooSmall' => 'Number of dependants cannot be less than 0'],
             [['first_name', 'last_name'], 'string', 'max' => 255],
         ];
     }
